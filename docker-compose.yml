@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  postgres17:
+    image: postgres:17
+    container_name: postgres17_container
+    restart: always
+    environment:
+      POSTGRES_USER: sposito
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: sposito   # se crea automáticamente al inicio
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata17:/var/lib/postgresql/data   # persistencia
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # script de inicialización
+
+volumes:
+  pgdata17:
